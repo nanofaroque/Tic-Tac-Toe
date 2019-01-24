@@ -1,5 +1,4 @@
 package com.nanofaroque.tictactoe;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,13 +16,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HeartbeatControllerTest {
+public class GameControllerTest {
     @Autowired
     private MockMvc mvc;
-
     @Test
-    public void heartbeat() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+    public void allGameTest() throws Exception{
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/games").
+                accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 }
