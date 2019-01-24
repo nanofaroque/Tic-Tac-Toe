@@ -1,5 +1,5 @@
 # Tic Tac Toe game
-This is a demo project for CSDisco purpose. 
+This is a demo project for Anaconda purpose. 
 
 ### Build and Fire application
 ```$xslt
