@@ -1,5 +1,7 @@
 package com.nanofaroque.tictactoe.response_model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +15,13 @@ import java.util.UUID;
 public class Game {
     @Getter
     @Setter
-    public UUID id;
+    @SerializedName("gameId")
+    @Expose
+    private UUID gameId;
 
     @Getter
     @Setter
+    @SerializedName("players")
+    @Expose
     List<Player> players;
 }

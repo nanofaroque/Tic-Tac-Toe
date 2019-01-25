@@ -30,7 +30,17 @@ public class GameController {
 
     @RequestMapping(path = "/api/v1/games", method = RequestMethod.POST)
     public Game game() {
-        return gameService.createGame(null);
+        Player p1=new Player();
+        p1.setId(UUID.randomUUID());
+        p1.setName("Eshika");
+
+        Player p2=new Player();
+        p2.setId(UUID.randomUUID());
+        p2.setName("Taslima");
+
+        List<Player> players=new ArrayList<>();
+        players.add(p1);players.add(p2);
+        return gameService.createGame(players);
     }
 
     @RequestMapping(path = "/api/v1/games/:gameId", method = RequestMethod.PUT)
