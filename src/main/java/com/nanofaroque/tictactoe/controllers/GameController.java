@@ -1,6 +1,7 @@
 package com.nanofaroque.tictactoe.controllers;
 
 import com.google.gson.Gson;
+import com.nanofaroque.tictactoe.request_body.AddGameRequestBody;
 import com.nanofaroque.tictactoe.response_model.Game;
 import com.nanofaroque.tictactoe.response_model.Player;
 import com.nanofaroque.tictactoe.service.IGameService;
@@ -29,17 +30,11 @@ public class GameController {
     }
 
     @RequestMapping(path = "/api/v1/games", method = RequestMethod.POST)
-    public Game game() {
-        Player p1=new Player();
-        p1.setId(UUID.randomUUID());
-        p1.setName("Eshika");
-
-        Player p2=new Player();
-        p2.setId(UUID.randomUUID());
-        p2.setName("Taslima");
-
+    public Game game(@RequestBody String body) {
+        Gson gson=new Gson();
+        AddGameRequestBody addGameRequestBody= gson.fromJson(body,AddGameRequestBody.class);
         List<Player> players=new ArrayList<>();
-        players.add(p1);players.add(p2);
+        players.addAll(addGameRequestBody.getPlayers());
         return gameService.createGame(players);
     }
 

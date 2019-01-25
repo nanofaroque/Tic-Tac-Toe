@@ -13,7 +13,10 @@ public class GameService implements IGameService {
 
     @Override
     public Game createGame(List<Player> players) {
-        return Helper.addGame(players);
+        Game game=new Game();
+        game.setGameId(UUID.randomUUID());
+        game.setPlayers(players);
+        return Helper.addGame(game);
     }
 
     @Override

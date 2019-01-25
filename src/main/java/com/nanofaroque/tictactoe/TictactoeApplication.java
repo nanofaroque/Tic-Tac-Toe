@@ -1,5 +1,6 @@
 package com.nanofaroque.tictactoe;
 
+import com.nanofaroque.tictactoe.data_source.Helper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,6 +14,7 @@ public class TictactoeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TictactoeApplication.class, args);
+		Helper.games.clear();
 	}
 
 	@Bean
