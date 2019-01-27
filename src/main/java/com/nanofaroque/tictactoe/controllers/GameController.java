@@ -1,6 +1,9 @@
 package com.nanofaroque.tictactoe.controllers;
 
 import com.google.gson.Gson;
+import com.nanofaroque.tictactoe.exceptions.EntityNotFoundException;
+import com.nanofaroque.tictactoe.exceptions.ParameterNotFoundException;
+import com.nanofaroque.tictactoe.exceptions.RequestBodyNotFoundException;
 import com.nanofaroque.tictactoe.request_body.AddGameRequestBody;
 import com.nanofaroque.tictactoe.response_model.Game;
 import com.nanofaroque.tictactoe.response_model.Player;
@@ -30,10 +33,11 @@ public class GameController {
     }
 
     @RequestMapping(path = "/api/v1/games", method = RequestMethod.POST)
-    public Game game(@RequestBody String body) {
-        Gson gson=new Gson();
-        AddGameRequestBody addGameRequestBody= gson.fromJson(body,AddGameRequestBody.class);
-        List<Player> players=new ArrayList<>();
+    public Game game(@RequestBody String body) throws RequestBodyNotFoundException {
+        if (body == null) throw new RequestBodyNotFoundException(GameController.class, "Request body is missing");
+        Gson gson = new Gson();
+        AddGameRequestBody addGameRequestBody = gson.fromJson(body, AddGameRequestBody.class);
+        List<Player> players = new ArrayList<>();
         players.addAll(addGameRequestBody.getPlayers());
         return gameService.createGame(players);
     }

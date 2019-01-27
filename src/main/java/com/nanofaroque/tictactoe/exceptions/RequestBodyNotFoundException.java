@@ -1,13 +1,10 @@
 package com.nanofaroque.tictactoe.exceptions;
 
-import com.nanofaroque.tictactoe.controllers.GameController;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
-
-public class ParameterNotFoundException extends Exception {
-    public ParameterNotFoundException(Class clazz, String param) {
-        super(ParameterNotFoundException.generateMessage(clazz.getSimpleName(), param));
+public class RequestBodyNotFoundException extends Exception {
+    public RequestBodyNotFoundException(Class clazz, String param) {
+        super(RequestBodyNotFoundException.generateMessage(clazz.getSimpleName(), param));
     }
 
     private static String generateMessage(String entity, String searchParams) {
@@ -15,5 +12,4 @@ public class ParameterNotFoundException extends Exception {
                 " was not found for parameters " +
                 searchParams;
     }
-
 }
