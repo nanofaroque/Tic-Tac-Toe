@@ -30,6 +30,7 @@ public class GameControllerTest {
     private MockMvc mvc;
     @Autowired
     Gson gson;
+
     @Test
     public void allGameTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/games").
@@ -39,7 +40,7 @@ public class GameControllerTest {
 
     @Test
     public void createGameTest() throws Exception {
-        AddGameRequestBody body=new AddGameRequestBody();
+        AddGameRequestBody body = new AddGameRequestBody();
         List<Player> players = new ArrayList<>();
         players.add(new Player("Omar", UUID.fromString("b088ce8e-ca41-43af-81a9-21460ff01e1f")));
         players.add(new Player("Faroque", UUID.fromString("d3209d42-5ad0-46fe-a935-4007bf79b6f7")));
@@ -57,5 +58,12 @@ public class GameControllerTest {
                 .content("")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void getGameTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/games/{gameId}" ,"")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
