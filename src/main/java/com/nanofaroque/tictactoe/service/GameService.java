@@ -1,7 +1,6 @@
 package com.nanofaroque.tictactoe.service;
 
 import com.nanofaroque.tictactoe.data_source.Helper;
-import com.nanofaroque.tictactoe.exceptions.EntityNotFoundException;
 import com.nanofaroque.tictactoe.response_model.Game;
 import com.nanofaroque.tictactoe.response_model.Player;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,8 @@ import java.util.UUID;
 public class GameService implements IGameService {
 
     @Override
-    public Game createGame(List<Player> players)  {
-        Game game=new Game();
+    public Game createGame(List<Player> players) {
+        Game game = new Game();
         game.setGameId(UUID.randomUUID());
         game.setPlayers(players);
         return Helper.addGame(game);
@@ -27,6 +26,9 @@ public class GameService implements IGameService {
 
     @Override
     public Game getGame(UUID id) {
+        for (Game g : Helper.games) {
+            if (g.getGameId() == id) return g;
+        }
         return null;
     }
 

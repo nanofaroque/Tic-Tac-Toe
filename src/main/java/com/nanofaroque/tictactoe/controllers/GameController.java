@@ -42,6 +42,13 @@ public class GameController {
         return gameService.createGame(players);
     }
 
+    @RequestMapping(path = "/api/v1/games/{gameId}", method = RequestMethod.GET)
+    public Game getGame(@PathVariable("gameId") String gameId) throws ParameterNotFoundException {
+        if (gameId == null)
+            throw new ParameterNotFoundException(GameController.class, "Request path variable is missing");
+        return gameService.getGame(UUID.fromString(gameId));
+    }
+
     @RequestMapping(path = "/api/v1/games/:gameId", method = RequestMethod.PUT)
     public Game updateGame(@PathVariable("gameId") UUID gameId,
                            @RequestBody String players) {
