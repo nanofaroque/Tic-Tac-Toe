@@ -71,7 +71,5 @@ public class GameController {
     @RequestMapping(path = "/api/v1/games/:gameId", method = RequestMethod.PATCH)
     public Game partialUpdateGame() {
         return gameService.partialUpdate();
-
-
     }
 }
