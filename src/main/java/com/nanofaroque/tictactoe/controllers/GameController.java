@@ -5,10 +5,13 @@ import com.nanofaroque.tictactoe.exceptions.EntityNotFoundException;
 import com.nanofaroque.tictactoe.exceptions.ParameterNotFoundException;
 import com.nanofaroque.tictactoe.exceptions.RequestBodyNotFoundException;
 import com.nanofaroque.tictactoe.request_body.AddGameRequestBody;
+import com.nanofaroque.tictactoe.response_model.DeletedGameResponse;
 import com.nanofaroque.tictactoe.response_model.Game;
 import com.nanofaroque.tictactoe.response_model.Player;
 import com.nanofaroque.tictactoe.service.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -58,8 +61,11 @@ public class GameController {
     }
 
     @RequestMapping(path = "/api/v1/games/{gameId}", method = RequestMethod.DELETE)
-    public Game deleteGame(@PathVariable("gameId") UUID gameId) {
-        return gameService.deleteGame(gameId);
+    public ResponseEntity<DeletedGameResponse> deleteGame(@PathVariable("gameId") UUID gameId) throws EntityNotFoundException {
+        if (gameService.deleteGame(gameId)) {
+            return new ResponseEntity<>(new DeletedGameResponse("game has been deleted", gameId), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new DeletedGameResponse("can not be deleted", gameId), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @RequestMapping(path = "/api/v1/games/:gameId", method = RequestMethod.PATCH)

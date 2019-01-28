@@ -1,5 +1,6 @@
 package com.nanofaroque.tictactoe.service;
 
+import com.nanofaroque.tictactoe.exceptions.EntityNotFoundException;
 import com.nanofaroque.tictactoe.response_model.Game;
 import com.nanofaroque.tictactoe.response_model.Player;
 
@@ -41,8 +42,9 @@ public interface IGameService {
      * Delete Game
      *
      * @param id Game ID
+     * @return deleted game or not
      */
-    Game deleteGame(UUID id);
+    boolean deleteGame(UUID id) throws EntityNotFoundException;
 
     Game partialUpdate();
 }
